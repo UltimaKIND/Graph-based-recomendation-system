@@ -162,6 +162,4 @@ cython_debug/
 .idea
 archive/
 data.ipynb
-listening.csv
 track_data.csv
-
