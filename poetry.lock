@@ -16,13 +16,13 @@ tests = ["mypy (>=0.800)", "pytest", "pytest-asyncio"]
 
 [[package]]
 name = "django"
-version = "5.1.2"
+version = "5.1.3"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "Django-5.1.2-py3-none-any.whl", hash = "sha256:f11aa87ad8d5617171e3f77e1d5d16f004b79a2cf5d2e1d2b97a6a1f8e9ba5ed"},
-    {file = "Django-5.1.2.tar.gz", hash = "sha256:bd7376f90c99f96b643722eee676498706c9fd7dc759f55ebfaf2c08ebcdf4f0"},
+    {file = "Django-5.1.3-py3-none-any.whl", hash = "sha256:8b38a9a12da3ae00cb0ba72da985ec4b14de6345046b1e174b1fd7254398f818"},
+    {file = "Django-5.1.3.tar.gz", hash = "sha256:c0fa0e619c39325a169208caef234f90baa925227032ad3f44842ba14d75234a"},
 ]
 
 [package.dependencies]
@@ -33,6 +33,24 @@ tzdata = {version = "*", markers = "sys_platform == \"win32\""}
 [package.extras]
 argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
+
+[[package]]
+name = "django-neomodel"
+version = "0.2.0"
+description = "Use Neo4j with Django!"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django_neomodel-0.2.0-py3-none-any.whl", hash = "sha256:0a1aab1bcf9f8882af6bae785e7cb8296db14e956de547857a9cbf3347230646"},
+    {file = "django_neomodel-0.2.0.tar.gz", hash = "sha256:8b4fb95924df227b323937ea7991337f7385739df5e0fbda820e0da0f4fa119a"},
+]
+
+[package.dependencies]
+django = ">=4.2.8"
+neomodel = ">=5.3.0,<5.4.0"
+
+[package.extras]
+dev = ["pytest (>=7.1)", "pytest-cov (>=4.0)", "pytest-django (>=4.5.2)"]
 
 [[package]]
 name = "djangorestframework"
@@ -106,6 +124,57 @@ files = [
     {file = "inflection-0.5.1-py2.py3-none-any.whl", hash = "sha256:f38b2b640938a4f35ade69ac3d053042959b62a0f1076a5bbaa1b9526605a8a2"},
     {file = "inflection-0.5.1.tar.gz", hash = "sha256:1a29730d366e996aaacffb2f1f1cb9593dc38e2ddd30c91250c6dde09ea9b417"},
 ]
+
+[[package]]
+name = "neo4j"
+version = "5.19.0"
+description = "Neo4j Bolt driver for Python"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "neo4j-5.19.0.tar.gz", hash = "sha256:23704f604214174f3b7d15a38653a1462809986019dfdaf773ff7ca4e1b9e2de"},
+]
+
+[package.dependencies]
+pytz = "*"
+
+[package.extras]
+numpy = ["numpy (>=1.7.0,<2.0.0)"]
+pandas = ["numpy (>=1.7.0,<2.0.0)", "pandas (>=1.1.0,<3.0.0)"]
+pyarrow = ["pyarrow (>=1.0.0)"]
+
+[[package]]
+name = "neomodel"
+version = "5.3.3"
+description = "An object mapper for the neo4j graph database."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "neomodel-5.3.3-py3-none-any.whl", hash = "sha256:ae1ffc9ac2a50a966a17504e90e9371ae2abc5d21faf07680a07e5657b5c34ab"},
+    {file = "neomodel-5.3.3.tar.gz", hash = "sha256:f8e24fbce5d1ccd1966b3bed65ac469243e9b4f14b7e6f11e80d2c9fce450d95"},
+]
+
+[package.dependencies]
+neo4j = ">=5.19.0,<5.20.0"
+
+[package.extras]
+dev = ["Shapely (>=2.0.0)", "black", "isort", "pre-commit", "pytest (>=7.1)", "pytest-asyncio", "pytest-cov (>=4.0)", "unasync"]
+numpy = ["numpy"]
+pandas = ["pandas"]
+
+[[package]]
+name = "neomodel-serializer"
+version = "0.0.1.dev2"
+description = "Serialize neomodels"
+optional = false
+python-versions = "*"
+files = [
+    {file = "neomodel-serializer-0.0.1.dev2.tar.gz", hash = "sha256:ac88d3948c4ab2a010b19a80c53246895dfa5722b68e56b16cabe43d50d01a98"},
+]
+
+[package.dependencies]
+neomodel = ">=3.2.5"
+six = "*"
 
 [[package]]
 name = "packaging"
@@ -391,6 +460,17 @@ files = [
 ]
 
 [[package]]
+name = "six"
+version = "1.16.0"
+description = "Python 2 and 3 compatibility utilities"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
+files = [
+    {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
+    {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
+]
+
+[[package]]
 name = "sqlparse"
 version = "0.5.1"
 description = "A non-validating SQL parser."
@@ -430,4 +510,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "a2de5220c7faa6c1e7c43224313da9a9083e04a0da7e1f5f2c9b7f4d1977b32e"
+content-hash = "ad589d082766d209fe6036cca65baeec2a5e3c2c5f166b2c53523ff40b0b0dc8"
