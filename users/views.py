@@ -1,42 +1,67 @@
-from rest_framework import filters, status
-from rest_framework.generics import CreateAPIView, get_object_or_404
-from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.viewsets import ModelViewSet
-
+import secrets, string, random
+from django.core.mail import send_mail
+from django.db.models.base import Model as Model
+from django.shortcuts import get_object_or_404, redirect
+from django.views.generic import CreateView, UpdateView
+from django.contrib.auth.views import PasswordResetView
+from django.urls import reverse_lazy, reverse
 from users.models import User
-from users.permissions import IsModer, IsOwner, IsSelfUser
-from users.serializers import UserSerializer, OtherUserSerializer
+from users.forms import UserRegistrationForm, UserProfileForm, PasswordForm
 
+class RegisterView(CreateView):
+    """
+    контроллер регистрации пользователя
+    """
+    model = User
+    form_class = UserRegistrationForm
+    success_url = reverse_lazy('users:login')
 
-class UserViewSet(ModelViewSet):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
-    permission_classes = [IsAuthenticated]
+    def form_valid(self, form):
+        user = form.save()
+        user.is_active = True
+        return super().form_valid(form)
 
-    def perform_create(self, serializer):
-        user = serializer.save(is_active=True)
-        user.set_password(user.password)
+def email_verification(request, token):
+    user = get_object_or_404(User, token=token)
+    user.is_active = True
+    user.save()
+    return redirect(reverse('users:login'))
+
+class ProfileView(UpdateView):
+    """
+    контроллер редактирования профиля пользователя
+    """
+    model = User
+    form_class = UserProfileForm
+    success_url = reverse_lazy('users:profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+class NewPasswordView(PasswordResetView):
+    """
+    контроллер сброса пароля пользователя
+    """
+    model = User
+    form_class = PasswordForm
+    template_name = "users/reset_password.html"
+    success_url = reverse_lazy("users/login.html")
+
+    def generate_password(self, length):
+        characters = string.ascii_letters + string.digits + string.punctuation
+        password = ''.join(random.choice(characters) for _ in range(length))
+        return password
+
+    def form_valid(self, form):
+        email = form.cleaned_data['email']
+        user = get_object_or_404(User, email=email)
+        password = self.generate_password(16)
+        user.set_password(password)
         user.save()
-
-    def get_permissions(self):
-        if self.action == "create":
-            self.permission_classes = (~IsAuthenticated,)
-        elif self.action == "destroy":
-            self.permission_classes = [IsAuthenticated, IsAdminUser]
-        elif self.action in ["update", "partial_update"]:
-            self.permission_classes = [IsAuthenticated, IsSelfUser]
-
-        return super().get_permissions()
-
-    def get_serializer_class(self):
-        if (
-            self.action in ["create", "update", "partial_update"]
-            or self.action == "retrieve"
-            and self.request.user == super().get_object()
-        ):
-            self.serializer_class = UserSerializer
-        else:
-            self.serializer_class = OtherUserSerializer
-        return self.serializer_class
+        send_mail(
+            subject="вы запросили сброс пароля",
+            message=f'новый пароль для входа: {password}',
+            from_email=EMAIL_HOST_USER,
+            recipient_list=[user.email]
+        )
+        return redirect(reverse('users:login'))

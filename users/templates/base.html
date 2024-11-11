@@ -1,0 +1,66 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mailings</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+    <header data-bs-theme="dark">
+        <div class="collapse text-bg-dark" id="navbarHeader">
+          <div class="container d-flex justify-content-end">
+            <div class="row">
+              <div class="col-sm-4 offset-md-1 py-4">
+                <h4>menu</h4>
+                <ul class="list-unstyled">
+                    <li>
+                    {% if user.is_authenticated %}
+                        <form action="{% url 'users:logout' %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-link link-light link-underline link-underline-opacity-0" type="submit">выйти</button>
+                        </form>
+
+                        <a class="link-light nav-link-active link-underline link-underline-opacity-0" href="{% url 'users:profile' %}">профиль</a>
+                    {% else %}
+                        <a class="link-light nav-link-active link-underline link-underline-opacity-0" href="{% url 'users:login' %}">войти</a>
+                        <a class="link-light nav-link-active link-underline link-underline-opacity-0" href="{% url 'users:register' %}">регистрация</a>
+                    {% endif %}
+                    </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+          <div class="container">
+            <div class='navbar'>
+                <strong>mailings</strong>
+              </a>
+                <strong>blog</strong>
+              </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+{% block content %}
+{% endblock %}
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+<footer class="text-body-secondary py-5">
+    <div class="container">
+      <p class="float-end mb-1">
+        <a href="#"></a>
+      </p>
+      <p class="mb-1">© Bootstrap</p>
+      <p class="mb-0"> Bootstrap <a href="/">  </a>  <a href="../getting-started/introduction/ ">  </a>.</p>
+    </div>
+  </footer>
+</html>
