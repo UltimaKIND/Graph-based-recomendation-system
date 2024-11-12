@@ -8,23 +8,6 @@ class UserNode(StructuredNode, NodeUtils):
     user_id = UniqueIdProperty()
     email = EmailProperty()
 
-    @property
-    def serialize(self):
-        return {
-            'node_properties': {
-                'user_id': self.user_id,
-                'email': self.email
-            },
-        }
-
-    @property
-    def serialize_connections(self):
-        return [
-            {
-                'nodes_type': 'UserNode',
-                'nodes_related': self.serialize_relationships(self.listening.all()),
-            },
-        ]
 
 class TrackNode(StructuredNode, NodeUtils):
     track_id = UniqueIdProperty()
@@ -32,40 +15,10 @@ class TrackNode(StructuredNode, NodeUtils):
     artist = StringProperty()
     genre = StringProperty()
 
-
-    @property
-    def serialize(self):
-        return {
-            'node_properties': {
-                'track_id': self.user_id,
-                'name': self.email,
-                'artist': self.artist,
-                'genre': self.genre,
-            },
-        }
-    @property
-    def serialize_connections(self):
-        return [
-            {
-                'nodes_type': 'UserNode',
-                'nodes_related': self.serialize_relationships(self.listening.all()),
-            },
-        ]
-
-
-
 class GenreNode(StructuredNode, NodeUtils):
     genre_id = UniqueIdProperty()
     genre = StringProperty()
 
-    @property
-    def serialize(self):
-        return {
-            'node_properties': {
-                'genre_id': self.user_id,
-                'genre': self.email
-            },
-        }
 
     # Relations :
     listening = RelationshipTo('TrackNode', 'LISTENED')
