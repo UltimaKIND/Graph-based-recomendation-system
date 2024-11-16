@@ -30,7 +30,7 @@ class Track(models.Model):
         verbose_name_plural = "треки"
 
     def __str__(self):
-        return self.name
+        return f'{self.artist} - {self.name} genre: {self.genre}'
 
 class Prefer(models.Model):
     '''

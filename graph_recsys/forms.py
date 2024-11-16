@@ -1,4 +1,4 @@
-from django.forms import ModelForm, CheckboxSelectMultiple, ModelMultipleChoiceField, BooleanField
+from django.forms import ModelForm, CheckboxSelectMultiple, ModelMultipleChoiceField, BooleanField, SelectMultiple
 
 from graph_recsys.models import Genre, Prefer
 
@@ -9,10 +9,10 @@ class StyleFormMixin:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            if isinstance(field, BooleanField):
-                field.widget.attrs['class'] = "form-check-input"
-            else:
-                field.widget.attrs['class'] = "form-control-lg"
+            field.widget.attrs={'size': '5'}
+            field.widget.attrs['class'] = "form-check-input"
+            field.widget.attrs['class'] = "form-control-lg"
+
 
 class PreferForm(StyleFormMixin, ModelForm):
 
@@ -21,5 +21,6 @@ class PreferForm(StyleFormMixin, ModelForm):
         fields = ('genres',)
         genres = ModelMultipleChoiceField(
             queryset=Genre.objects.all(),
-            widget=CheckboxSelectMultiple
+            widget=SelectMultiple(),
+
         )

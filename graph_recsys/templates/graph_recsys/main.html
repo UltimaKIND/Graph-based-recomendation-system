@@ -5,25 +5,24 @@
         <h1 class="display-4">rec_sys</h1>
     </div>
     <div class="d-flex justify-content-center text-center gy-5">
-                <div class="col-4">
-                   <p>test</p>
+                <div class="col-3">
+                    <p>recomendations based on page_rank</p>
+                    {% for track in page_rank %}
+                    {{ track }}
+                    {% endfor %}
                 </div>
-                <div class="col-4">
-                    <ul class="list-group">
-                        {% for prefer in prefers %}
-                            <li class="list-group-item list-group-item-primary">{{ prefer }}</li>
-                        {% endfor %}
-                    </ul>
+                <div class="col-3">
+                    <p>test</p>
+                </div>
+                <div class="col-3">
                     <div>
                         {% if prefers is None %}
-
-                            <form method="post" action="{% url 'recsys:create' %}">
+                            <form method="post" id="form_1" action="{% url 'recsys:create' %}">
                                 {% csrf_token %}
-                                {{ form.as_p }}
-                                <button type="submit" class="btn btn-primary">create</button>
+                                {{ form|crispy }}
                             </form>
                         {% else %}
-                            <form method="post" id="form_1" class="form" action="{% url 'recsys:update' pref.pk %}">
+                            <form method="post" id="form_2" class="form" action="{% url 'recsys:update' pref.pk %}">
                                 {% csrf_token %}
                                 {{ form|crispy }}
                             </form>
@@ -33,13 +32,18 @@
            </div>
     </div>
     <div class="d-flex justify-content-center text-center gy-5">
-        <div class="col-4">
-            {% autoescape off %}
-                <div>{{ test }}</div>
-            {% endautoescape %}
+        <div class="col-3">
+            <p> rec_data from collaborative_filtering</p>
         </div>
-        <div class="col-4">
-            <input type="submit" form="form_1" value="Update"/>
+        <div class="col-3">
+            <p> rec_data from simrank_similarity</p>
+        </div>
+        <div class="col-3">
+            {% if prfers is None %}
+                <input type="submit" form="form_1" value="create"/>
+            {% else %}
+                <input type="submit" form="form_2" value="update"/>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

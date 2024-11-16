@@ -72,13 +72,13 @@ class Command(BaseCommand):
         prefer_list = [
             {'user': {'user': User.objects.get(id=1),}, 'genres': (1, 2)},
             {'user': {'user': User.objects.get(id=2),}, 'genres': (1, 2)},
-            {'user': {'user': User.objects.get(id=3),}, 'genres': (1, 2, 4)},
+            {'user': {'user': User.objects.get(id=3),}, 'genres': (1, 2, 3)},
             {'user': {'user': User.objects.get(id=4),}, 'genres': (1, 2)},
-            {'user': {'user': User.objects.get(id=5),}, 'genres': (1, 4)},
+            {'user': {'user': User.objects.get(id=5),}, 'genres': (1, 3)},
             {'user': {'user': User.objects.get(id=6),}, 'genres': (1, 3, 4)},
-            {'user': {'user': User.objects.get(id=7),}, 'genres': (3, 4, 5)},
-            {'user': {'user': User.objects.get(id=8),}, 'genres': (4, 5)},
-            {'user': {'user': User.objects.get(id=9),}, 'genres': (1, 3, 5)},
+            {'user': {'user': User.objects.get(id=7),}, 'genres': (3, 4)},
+            {'user': {'user': User.objects.get(id=8),}, 'genres': (3, 5,)},
+            {'user': {'user': User.objects.get(id=9),}, 'genres': (1, 4, 5)},
             {'user': {'user': User.objects.get(id=10),}, 'genres': (3, 4)},
         ]
 
