@@ -24,6 +24,8 @@
                         </form>
 
                         <a class="link-light nav-link-active link-underline link-underline-opacity-0" href="{% url 'users:profile' %}">профиль</a>
+                        <a class="link-light nav-link-active link-underline link-underline-opacity-0" href="{% url 'graph_recsys:main' %}">главная</a>
+                        <a class="link-light nav-link-active link-underline link-underline-opacity-0" href="{% url 'graph_recsys:statistics' %}">статистика</a>
                     {% else %}
                         <a class="link-light nav-link-active link-underline link-underline-opacity-0" href="{% url 'users:login' %}">войти</a>
                         <a class="link-light nav-link-active link-underline link-underline-opacity-0" href="{% url 'users:register' %}">регистрация</a>
@@ -55,12 +57,5 @@
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 <footer class="text-body-secondary py-5">
-    <div class="container">
-      <p class="float-end mb-1">
-        <a href="#"></a>
-      </p>
-      <p class="mb-1">© Bootstrap</p>
-      <p class="mb-0"> Bootstrap <a href="/">  </a>  <a href="../getting-started/introduction/ ">  </a>.</p>
-    </div>
   </footer>
 </html>

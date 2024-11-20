@@ -1,6 +1,7 @@
 from django.forms import ModelForm, CheckboxSelectMultiple, ModelMultipleChoiceField, BooleanField, SelectMultiple
 
-from graph_recsys.models import Genre, Prefer
+from graph_recsys.models import Genre, Prefer, Track
+
 
 class StyleFormMixin:
     """
@@ -24,3 +25,8 @@ class PreferForm(StyleFormMixin, ModelForm):
             widget=SelectMultiple(),
 
         )
+class TrackForm(StyleFormMixin, ModelForm):
+
+    class Meta:
+        model = Track
+        fields = '__all__'
