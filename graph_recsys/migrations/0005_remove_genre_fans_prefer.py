@@ -8,25 +8,47 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('graph_recsys', '0004_alter_genre_fans'),
+        ("graph_recsys", "0004_alter_genre_fans"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='genre',
-            name='fans',
+            model_name="genre",
+            name="fans",
         ),
         migrations.CreateModel(
-            name='Prefer',
+            name="Prefer",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('genre', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='graph_recsys.genre', verbose_name='жанр')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='фанат')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "genre",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="graph_recsys.genre",
+                        verbose_name="жанр",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="фанат",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'предпочтение',
-                'verbose_name_plural': 'предпочтения',
+                "verbose_name": "предпочтение",
+                "verbose_name_plural": "предпочтения",
             },
         ),
     ]

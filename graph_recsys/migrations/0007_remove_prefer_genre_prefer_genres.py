@@ -6,17 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('graph_recsys', '0006_alter_prefer_genre_alter_prefer_user'),
+        ("graph_recsys", "0006_alter_prefer_genre_alter_prefer_user"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='prefer',
-            name='genre',
+            model_name="prefer",
+            name="genre",
         ),
         migrations.AddField(
-            model_name='prefer',
-            name='genres',
-            field=models.ManyToManyField(to='graph_recsys.genre', verbose_name='жанры'),
+            model_name="prefer",
+            name="genres",
+            field=models.ManyToManyField(to="graph_recsys.genre", verbose_name="жанры"),
         ),
     ]

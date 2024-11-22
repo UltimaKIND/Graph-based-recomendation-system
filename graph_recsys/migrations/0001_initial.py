@@ -15,28 +15,65 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Genre',
+            name="Genre",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('genre_name', models.CharField(max_length=100, verbose_name='название жанра')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "genre_name",
+                    models.CharField(max_length=100, verbose_name="название жанра"),
+                ),
             ],
             options={
-                'verbose_name': 'жанр',
-                'verbose_name_plural': 'жанры',
+                "verbose_name": "жанр",
+                "verbose_name_plural": "жанры",
             },
         ),
         migrations.CreateModel(
-            name='Track',
+            name="Track",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, verbose_name='название трека')),
-                ('artist', models.CharField(max_length=100, verbose_name='исполнитель')),
-                ('genre', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='graph_recsys.genre', verbose_name='жанр')),
-                ('listeners', models.ManyToManyField(to=settings.AUTH_USER_MODEL, verbose_name='слушатели')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(max_length=100, verbose_name="название трека"),
+                ),
+                (
+                    "artist",
+                    models.CharField(max_length=100, verbose_name="исполнитель"),
+                ),
+                (
+                    "genre",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="graph_recsys.genre",
+                        verbose_name="жанр",
+                    ),
+                ),
+                (
+                    "listeners",
+                    models.ManyToManyField(
+                        to=settings.AUTH_USER_MODEL, verbose_name="слушатели"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'трек',
-                'verbose_name_plural': 'треки',
+                "verbose_name": "трек",
+                "verbose_name_plural": "треки",
             },
         ),
     ]

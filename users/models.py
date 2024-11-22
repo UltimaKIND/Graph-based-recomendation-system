@@ -10,7 +10,7 @@ class User(AbstractUser):
     """
 
     username = None
-    first_name = models.CharField(max_length=100, verbose_name='имя')
+    first_name = models.CharField(max_length=100, verbose_name="имя")
     email = models.EmailField(unique=True, verbose_name="почта")
     avatar = models.ImageField(
         upload_to="users/avatars", verbose_name="аватар", **NULLABLE

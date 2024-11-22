@@ -7,19 +7,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('graph_recsys', '0001_initial'),
+        ("graph_recsys", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='genre',
-            old_name='genre_name',
-            new_name='name',
+            model_name="genre",
+            old_name="genre_name",
+            new_name="name",
         ),
         migrations.AlterField(
-            model_name='track',
-            name='listeners',
-            field=models.ManyToManyField(blank=True, null=True, to=settings.AUTH_USER_MODEL, verbose_name='слушатели'),
+            model_name="track",
+            name="listeners",
+            field=models.ManyToManyField(
+                blank=True,
+                null=True,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="слушатели",
+            ),
         ),
     ]

@@ -8,19 +8,31 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('graph_recsys', '0005_remove_genre_fans_prefer'),
+        ("graph_recsys", "0005_remove_genre_fans_prefer"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='prefer',
-            name='genre',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='graph_recsys.genre', verbose_name='жанр'),
+            model_name="prefer",
+            name="genre",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="graph_recsys.genre",
+                verbose_name="жанр",
+            ),
         ),
         migrations.AlterField(
-            model_name='prefer',
-            name='user',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='фанат'),
+            model_name="prefer",
+            name="user",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="фанат",
+            ),
         ),
     ]
