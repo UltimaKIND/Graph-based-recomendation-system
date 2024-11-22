@@ -1,18 +1,15 @@
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
-from rest_framework.routers import SimpleRouter
-from rest_framework_simplejwt.views import (TokenObtainPairView,
-                                            TokenRefreshView)
-
+from users.views import RegisterView, ProfileView, NewPasswordView, email_verification
 from users.apps import UsersConfig
-from users.views import UserViewSet
 
 app_name = UsersConfig.name
 
-router = SimpleRouter()
-router.register(r"", UserViewSet, basename="users")
-
-
+# урлы приложения users
 urlpatterns = [
-    path("login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-] + router.urls
+    path("login/", LoginView.as_view(template_name="users/login.html"), name="login"),
+    path("logout/", LogoutView.as_view(), name="logout"),
+    path("register/", RegisterView.as_view(), name="register"),
+    path("profile/", ProfileView.as_view(), name="profile"),
+    path("reset-pasword/", NewPasswordView.as_view(), name="reset-password"),
+]

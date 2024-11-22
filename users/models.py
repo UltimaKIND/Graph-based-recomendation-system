@@ -10,12 +10,11 @@ class User(AbstractUser):
     """
 
     username = None
+    first_name = models.CharField(max_length=100, verbose_name="имя")
     email = models.EmailField(unique=True, verbose_name="почта")
     avatar = models.ImageField(
         upload_to="users/avatars", verbose_name="аватар", **NULLABLE
     )
-    token = models.CharField(max_length=100, verbose_name="token", **NULLABLE)
-
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
@@ -24,4 +23,4 @@ class User(AbstractUser):
         verbose_name_plural = "Пользователи"
 
     def __str__(self):
-        return self.email
+        return self.first_name
